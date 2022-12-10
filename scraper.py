@@ -43,12 +43,19 @@ for job_element in job_elements:
 #     print(location_element.text)
 #     print()
 
-# Extract Text From HTML Elements without the irrelevant "whitespace".
-for job_element in job_elements:
-    title_element = job_element.find("h2", class_="title")
-    company_element = job_element.find("h3", class_="company")
-    location_element = job_element.find("p", class_="location")
-    print(title_element.text.strip())
-    print(company_element.text.strip())
-    print(location_element.text.strip())
-    print()
+# Write to file:
+with open("scraper_output.txt", "w+") as f:
+      # Extract Text From HTML Elements without the irrelevant "whitespace".
+      for job_element in job_elements:
+            title_element = job_element.find("h2", class_="title")
+            company_element = job_element.find("h3", class_="company")
+            location_element = job_element.find("p", class_="location")
+            print(title_element.text.strip())
+            print(company_element.text.strip())
+            print(location_element.text.strip())
+            print()
+
+            f.write(title_element.text.strip() + "\n")
+            f.write(company_element.text.strip() + "\n")
+            f.write(location_element.text.strip() + "\n")
+            f.write("\n")
