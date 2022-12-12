@@ -68,3 +68,6 @@ console.log(file_data.toString());
 //     console.log(chunk);
 // }
 // console.log(await file_stream);
+
+// Source: https://docs.ipfs.tech/basics/js/js-ipfs/
+// Source: https://github.com/ipfs/js-ipfs/blob/master/docs/core-api/FILES.md
