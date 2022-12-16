@@ -53,10 +53,11 @@ const file_results = await ipfs.add(input_file);
 // });
 console.log(file_results.cid.toString());
 
+/*
 // const file_stream = ipfs.cat(file_results.path);
 // const file_stream = ipfs.get(file_results.path, {archive: true, compress: false});
 const file_stream = ipfs.cat(file_results.cid)
-let file_data = [];
+const file_data = [];
 
 // for await (const chunk of file_stream) {
 for await (const chunk of ipfs.cat(file_results.cid)){
@@ -68,6 +69,27 @@ console.log(file_data.toString());
 //     console.log(chunk);
 // }
 // console.log(await file_stream);
+*/
 
 // Source: https://docs.ipfs.tech/basics/js/js-ipfs/
 // Source: https://github.com/ipfs/js-ipfs/blob/master/docs/core-api/FILES.md
+
+// Try and read contents to file, upload contents to IPFS, pull contents from
+// IPFS, and write contents to a new file.
+const content_results = await ipfs.add(contents);
+console.log(content_results.cid);
+
+const read_contents = ipfs.get(content_results.path);
+let read_data = '';
+
+for await (const chunk of read_contents) {
+    read_data += decoder.decode(chunk, {stream: true});
+}
+console.log(read_data);
+
+fs.writeFileSync('./scraper_output_ipfs.txt', read_data, err => {
+    if (err) {
+        console.error(err);
+        return;
+    }
+});
