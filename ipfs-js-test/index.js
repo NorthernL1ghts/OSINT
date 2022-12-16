@@ -93,3 +93,6 @@ fs.writeFileSync('./scraper_output_ipfs.txt', read_data, err => {
         return;
     }
 });
+
+// Exit the program.
+process.exit();
